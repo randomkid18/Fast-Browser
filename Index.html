@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="description" content="Fast Browser - A lightweight, privacy-focused web browser">
+  <title>Fast Browser</title>
+  <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiRmFzdCBCcm93c2VyIiwic2hvcnRfbmFtZSI6IkZhc3RCcm93c2VyIiwic3RhcnRfdXJsIjoiLiIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMxYTFhMmUiLCJ0aGVtZV9jb2xvciI6IiMxYTFhMmUifQ==">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- VIEW 0: Privacy & Policy Onboarding -->
+  <section id="view-onboarding" class="view view-onboarding" aria-label="Onboarding" style="display:none;">
+    <div class="onboarding-container">
+      <div class="onboarding-slides" id="onboarding-slides">
+        <!-- Slide 1 -->
+        <div class="onboarding-slide" data-slide="1">
+          <div class="onboarding-icon">
+            <svg viewBox="0 0 64 64" width="80" height="80" fill="none" stroke="#C8B6FF" stroke-width="1.5">
+              <circle cx="32" cy="32" r="28"/>
+              <path d="M20 32h24M32 20v24"/>
+              <path d="M32 12v8M32 44v8M12 32h8M44 32h8"/>
+            </svg>
+          </div>
+          <h2 class="onboarding-title">Welcome to Fast Browser</h2>
+          <p class="onboarding-text">Experience the web with speed, simplicity, and elegance. Your lightweight companion for everyday browsing.</p>
+        </div>
+        <!-- Slide 2 -->
+        <div class="onboarding-slide" data-slide="2">
+          <div class="onboarding-icon">
+            <svg viewBox="0 0 64 64" width="80" height="80" fill="none" stroke="#C8B6FF" stroke-width="1.5">
+              <rect x="12" y="8" width="40" height="48" rx="4"/>
+              <path d="M20 20h24M20 28h16"/>
+              <circle cx="32" cy="44" r="4"/>
+            </svg>
+          </div>
+          <h2 class="onboarding-title">Privacy First</h2>
+          <p class="onboarding-text">We collect minimal data only to enhance your experience. Your search queries are stored locally and optionally synced to your personal spreadsheet.</p>
+        </div>
+        <!-- Slide 3 -->
+        <div class="onboarding-slide" data-slide="3">
+          <div class="onboarding-icon">
+            <svg viewBox="0 0 64 64" width="80" height="80" fill="none" stroke="#C8B6FF" stroke-width="1.5">
+              <path d="M32 8L38 20h12L42 28l4 12-14-8-14 8 4-12-8-8h12z"/>
+              <path d="M16 48h32M20 54h24"/>
+            </svg>
+          </div>
+          <h2 class="onboarding-title">Your Control</h2>
+          <p class="onboarding-text">Manage cookies and storage preferences anytime. You have full control over what data is kept and what is discarded.</p>
+        </div>
+        <!-- Slide 4 -->
+        <div class="onboarding-slide" data-slide="4">
+          <div class="onboarding-icon">
+            <svg viewBox="0 0 64 64" width="80" height="80" fill="none" stroke="#C8B6FF" stroke-width="1.5">
+              <path d="M8 32c0-13.255 10.745-24 24-24s24 10.745 24 24-10.745 24-24 24"/>
+              <path d="M32 32l12-12M32 32l-8 16"/>
+              <circle cx="32" cy="32" r="4"/>
+            </svg>
+          </div>
+          <h2 class="onboarding-title">Transparency</h2>
+          <p class="onboarding-text">Search data is handled securely. We use Google Spreadsheet as your personal database — visible, exportable, and under your ownership.</p>
+        </div>
+        <!-- Slide 5 -->
+        <div class="onboarding-slide" data-slide="5">
+          <div class="onboarding-icon">
+            <svg viewBox="0 0 64 64" width="80" height="80" fill="none" stroke="#C8B6FF" stroke-width="1.5">
+              <path d="M16 34l8 8 24-24"/>
+              <circle cx="32" cy="32" r="28"/>
+            </svg>
+          </div>
+          <h2 class="onboarding-title">Ready</h2>
+          <p class="onboarding-text">Fast Browser is ready to go. Tap below to start your secure and seamless browsing journey.</p>
+          <div class="trust-seal">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#C8B6FF" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span>Privacy Verified</span>
+          </div>
+          <button id="btn-onboarding-oke" class="btn btn-primary btn-large" type="button">Oke</button>
+        </div>
+      </div>
+      <!-- Dot Indicators -->
+      <div class="onboarding-dots" id="onboarding-dots" role="tablist" aria-label="Onboarding slides">
+        <button class="onboarding-dot active" data-slide="1" role="tab" aria-label="Slide 1" aria-selected="true"></button>
+        <button class="onboarding-dot" data-slide="2" role="tab" aria-label="Slide 2" aria-selected="false"></button>
+        <button class="onboarding-dot" data-slide="3" role="tab" aria-label="Slide 3" aria-selected="false"></button>
+        <button class="onboarding-dot" data-slide="4" role="tab" aria-label="Slide 4" aria-selected="false"></button>
+        <button class="onboarding-dot" data-slide="5" role="tab" aria-label="Slide 5" aria-selected="false"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW 1: Home Page -->
+  <section id="view-home" class="view view-home" aria-label="Home" style="display:none;">
+    <div class="home-content">
+      <!-- Logo -->
+      <div class="logo-container">
+        <h1 class="logo-text">Fast Browser</h1>
+        <div class="logo-subtitle">Lightweight. Private. Yours.</div>
+      </div>
+      <!-- Search Bar -->
+      <div class="home-search-wrapper" id="home-search-wrapper">
+        <div class="search-bar search-bar-home" id="home-search-bar" role="button" tabindex="0" aria-label="Search or enter address">
+          <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21l-4.35-4.35"/>
+          </svg>
+          <span class="search-placeholder">Search or enter address</span>
+          <svg class="mic-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/>
+            <path d="M19 10v2a7 7 0 01-14 0v-2"/>
+            <path d="M12 19v4M8 23h8"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW 2: Search Interface -->
+  <section id="view-search" class="view view-search" aria-label="Search" style="display:none;">
+    <div class="search-header">
+      <h2 class="search-header-title">Search</h2>
+      <button id="btn-search-close" class="icon-btn" type="button" aria-label="Close search">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div class="search-input-wrapper">
+      <div class="search-input-container">
+        <svg class="search-input-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <input 
+          type="text" 
+          id="search-input" 
+          class="search-input" 
+          placeholder="Search or enter address" 
+          autocomplete="off" 
+          autocorrect="off" 
+          autocapitalize="off" 
+          spellcheck="false"
+          aria-label="Search query"
+        >
+        <button id="btn-search-clear" class="icon-btn search-clear-btn" type="button" aria-label="Clear search" style="display:none;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M15 9l-6 6M9 9l6 6"/>
+          </svg>
+        </button>
+        <select id="search-engine-select" class="search-engine-select" aria-label="Search engine">
+          <option value="google">Google</option>
+          <option value="bing">Bing</option>
+          <option value="duckduckgo">DuckDuckGo</option>
+        </select>
+        <button id="btn-search-submit" class="icon-btn" type="button" aria-label="Search">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="search-history-section">
+      <div class="search-history-header">
+        <h3 class="search-history-title">Recent Searches</h3>
+        <button id="btn-clear-all-history" class="text-btn" type="button">Clear All</button>
+      </div>
+      <div id="search-history-list" class="search-history-list" role="list">
+        <!-- History items injected here -->
+      </div>
+      <div id="search-history-empty" class="search-history-empty" style="display:none;">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <p>No recent searches</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW 3: Search Results -->
+  <section id="view-results" class="view view-results" aria-label="Search Results" style="display:none;">
+    <div class="results-header">
+      <div class="results-search-bar" id="results-search-bar" role="button" tabindex="0" aria-label="Current search query">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <span id="results-query-text" class="results-query-text">Search query</span>
+      </div>
+    </div>
+    <div class="iframe-container">
+      <div id="iframe-loader" class="iframe-loader" style="display:none;">
+        <div class="iframe-loader-pulse"></div>
+      </div>
+      <iframe 
+        id="results-iframe" 
+        class="results-iframe" 
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups" 
+        title="Search Results"
+        loading="lazy"
+      ></iframe>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <nav id="dashboard" class="dashboard" role="navigation" aria-label="Main navigation">
+    <button class="dashboard-item" data-view="home" role="button" aria-label="Home">
+      <svg class="dashboard-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+        <path d="M9 22V12h6v10"/>
+      </svg>
+      <span class="dashboard-label">Home</span>
+    </button>
+    <button class="dashboard-item" data-view="userscripts" role="button" aria-label="UserScripts">
+      <svg class="dashboard-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+        <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+      </svg>
+      <span class="dashboard-label">UserScripts</span>
+    </button>
+    <button class="dashboard-item" data-view="settings" role="button" aria-label="Settings">
+      <svg class="dashboard-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+      </svg>
+      <span class="dashboard-label">Settings</span>
+    </button>
+  </nav>
+
+  <!-- MODAL: UserScripts -->
+  <div id="modal-userscripts" class="modal modal-bottom-sheet" role="dialog" aria-modal="true" aria-label="UserScripts" style="display:none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">UserScripts</h2>
+        <div class="modal-actions">
+          <button id="btn-add-userscript" class="icon-btn" type="button" aria-label="Add new script">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+          </button>
+          <button id="btn-close-userscripts" class="icon-btn" type="button" aria-label="Close">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div id="userscripts-list" class="userscripts-list">
+          <!-- Scripts injected here -->
+        </div>
+        <div id="userscripts-empty" class="userscripts-empty" style="display:none;">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+          </svg>
+          <p>No scripts yet. Tap + to add one.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: UserScript Form (Add/Edit) -->
+  <div id="modal-userscript-form" class="modal modal-bottom-sheet" role="dialog" aria-modal="true" aria-label="UserScript Form" style="display:none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="userscript-form-title">Add Script</h2>
+        <button id="btn-close-userscript-form" class="icon-btn" type="button" aria-label="Close">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="userscript-form" class="userscript-form" novalidate>
+          <input type="hidden" id="userscript-id" value="">
+          <div class="form-group">
+            <label for="userscript-name" class="form-label">Name</label>
+            <input 
+              type="text" 
+              id="userscript-name" 
+              class="form-input" 
+              placeholder="Script name" 
+              maxlength="50" 
+              required
+              aria-required="true"
+            >
+          </div>
+          <div class="form-group">
+            <label for="userscript-code" class="form-label">Code</label>
+            <textarea 
+              id="userscript-code" 
+              class="form-textarea form-textarea-code" 
+              placeholder="// Your JavaScript code here..." 
+              required
+              aria-required="true"
+              spellcheck="false"
+            ></textarea>
+          </div>
+          <div class="form-group form-group-inline">
+            <label for="userscript-enabled" class="form-label">Enabled</label>
+            <label class="toggle-switch">
+              <input type="checkbox" id="userscript-enabled" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="form-actions">
+            <button type="button" id="btn-userscript-cancel" class="btn btn-secondary">Cancel</button>
+            <button type="submit" id="btn-userscript-save" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Settings -->
+  <div id="modal-settings" class="modal modal-bottom-sheet" role="dialog" aria-modal="true" aria-label="Settings" style="display:none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Settings</h2>
+        <button id="btn-close-settings" class="icon-btn" type="button" aria-label="Close">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="settings-section">
+          <h3 class="settings-section-title">General</h3>
+          <div class="settings-item">
+            <div class="settings-item-info">
+              <span class="settings-item-label">Search Engine</span>
+              <span class="settings-item-desc">Default search provider</span>
+            </div>
+            <select id="setting-search-engine" class="settings-select">
+              <option value="google">Google</option>
+              <option value="bing">Bing</option>
+              <option value="duckduckgo">DuckDuckGo</option>
+            </select>
+          </div>
+          <div class="settings-item">
+            <div class="settings-item-info">
+              <span class="settings-item-label">Sync to Spreadsheet</span>
+              <span class="settings-item-desc">Backup data to Google Sheets</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="setting-sync-enabled">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+        <div class="settings-section">
+          <h3 class="settings-section-title">Privacy</h3>
+          <div class="settings-item">
+            <div class="settings-item-info">
+              <span class="settings-item-label">Clear Search History</span>
+              <span class="settings-item-desc">Remove all local search records</span>
+            </div>
+            <button id="btn-clear-history" class="btn btn-danger btn-small" type="button">Clear</button>
+          </div>
+          <div class="settings-item">
+            <div class="settings-item-info">
+              <span class="settings-item-label">Reset Onboarding</span>
+              <span class="settings-item-desc">Show welcome slides again</span>
+            </div>
+            <button id="btn-reset-onboarding" class="btn btn-secondary btn-small" type="button">Reset</button>
+          </div>
+        </div>
+        <div class="settings-section">
+          <h3 class="settings-section-title">About</h3>
+          <div class="settings-item">
+            <div class="settings-item-info">
+              <span class="settings-item-label">Version</span>
+              <span class="settings-item-desc">Fast Browser v1.0.0</span>
+            </div>
+          </div>
+          <div class="settings-item">
+            <div class="settings-item-info">
+              <span class="settings-item-label">Device ID</span>
+              <span class="settings-item-desc" id="settings-device-id">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Confirm Dialog -->
+  <div id="modal-confirm" class="modal modal-center" role="dialog" aria-modal="true" aria-label="Confirm" style="display:none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content modal-content-small">
+      <div class="modal-body">
+        <p id="confirm-message" class="confirm-message">Are you sure?</p>
+        <div class="confirm-actions">
+          <button id="btn-confirm-cancel" class="btn btn-secondary" type="button">Cancel</button>
+          <button id="btn-confirm-ok" class="btn btn-danger" type="button">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
